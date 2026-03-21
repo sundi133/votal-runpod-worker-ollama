@@ -1,12 +1,12 @@
-# redbus-runpod-worker-ollama
+# votal-runpod-worker-ollama
 
-RunPod Serverless worker for [Ollama](https://ollama.com), purpose-built for the [Redbus Agent](https://github.com/guilecc/redbusagent) ecosystem.
+RunPod Serverless worker for [Ollama](https://ollama.com), purpose-built for the [Votal AI](https://github.com/sundi133/votal-runpod-worker-ollama) ecosystem.
 
-This worker acts as the **Worker Engine** in Redbus's Dual-Local Architecture — offloading heavy LLM inference to RunPod's serverless GPUs while the Live Engine handles real-time chat locally.
+This worker acts as the **Worker Engine** in Votal AI's Dual-Local Architecture — offloading heavy LLM inference to RunPod's serverless GPUs while the Live Engine handles real-time chat locally.
 
 ## Purpose
 
-Redbus Agent uses a "Two Brains, One Machine" architecture. This worker bridges the gap between RunPod's serverless infrastructure and Ollama's native API, providing:
+Votal AI uses a "Two Brains, One Machine" architecture. This worker bridges the gap between RunPod's serverless infrastructure and Ollama's native API, providing:
 
 - **Native Ollama protocol support** — forwards `/api/chat` and `/api/generate` payloads directly, preserving tools, options (`num_ctx`, `temperature`, etc.), and per-request model selection.
 - **Tool calling** — full pass-through of Ollama's native `tools` and `tool_calls` for agentic workflows.
@@ -16,7 +16,7 @@ Redbus Agent uses a "Two Brains, One Machine" architecture. This worker bridges 
 
 ## How it works
 
-The Redbus daemon (`runpod-ollama.ts`) sends Ollama payloads wrapped in RunPod's envelope:
+The Votal AI daemon (`runpod-ollama.ts`) sends Ollama payloads wrapped in RunPod's envelope:
 
 ```json
 {
@@ -33,13 +33,13 @@ The Redbus daemon (`runpod-ollama.ts`) sends Ollama payloads wrapped in RunPod's
 ```
 
 The worker routes to the correct engine based on input format:
-- `method` + `data` → **OllamaNativeEngine** (Redbus path)
+- `method` + `data` → **OllamaNativeEngine** (Votal AI path)
 - `openai_route` → **OllamaOpenAiEngine** (legacy OpenAI-compatible)
 - raw `messages`/`prompt` → **OllamaEngine** (legacy fallback)
 
 ## Deployment
 
-[![Runpod](https://api.runpod.io/badge/guilecc/redbus-runpod-worker-ollama)](https://console.runpod.io/hub/guilecc/redbus-runpod-worker-ollama)
+[![Runpod](https://api.runpod.io/badge/sundi133/votal-runpod-worker-ollama)](https://console.runpod.io/hub/sundi133/votal-runpod-worker-ollama)
 
 ## Environment variables
 
