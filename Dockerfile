@@ -1,4 +1,4 @@
-ARG OLLAMA_VERSION=0.32.9
+ARG OLLAMA_VERSION=0.32.11
 
 # ─── Base image with Ollama pre-installed ─────────────────────────
 FROM ollama/ollama:${OLLAMA_VERSION}
